@@ -1,0 +1,26 @@
+from TTS.api import TTS
+import time
+
+# 1. Load a professional, strong-sounding American English TTS model
+# Model: 'tts_models/en/ljspeech/tacotron2-DDC'
+tts = TTS(model_name="tts_models/en/ljspeech/tacotron2-DDC")
+
+def text_to_speech(text, filename=None):
+    """
+    Convert English text to professional, strong-sounding American English speech.
+    """
+    if filename is None:
+        # Dynamic filename to avoid overwriting previous files
+        timestamp = int(time.time())
+        filename = f"speech_output_{timestamp}.wav"
+    
+    tts.tts_to_file(text=text, file_path=filename)
+    print(f"[✅] Speech saved as '{filename}' using model 'tts_models/en/ljspeech/tacotron2-DDC'")
+
+# 2. Unlimited American English text-to-speech
+print("Type 'exit' to quit.")
+while True:
+    user_input = input("Enter American English text: ")
+    if user_input.lower() == "exit":
+        break
+    text_to_speech(user_input)
